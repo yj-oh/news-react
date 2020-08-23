@@ -4,7 +4,7 @@ import NewsItem from "./NewsItem";
 import axios from 'axios';
 
 const NewsListBlock = styled.div`
-	padding: 1rem;
+	padding: 0.2rem 1rem 1rem 1rem;
 	background-color: rgb(245, 245, 245);
 	color: #3c3c3c;
 	box-sizing: border-box;
@@ -14,7 +14,7 @@ const NewsListBlock = styled.div`
 	}
 `;
 
-const NewsList = () => {
+const NewsList = ({ category }) => {
 	const [datetime] = useState(new Date());
 	const [articles, setArticles] = useState(null);
 	const [loading, setLoading] = useState(false);
@@ -23,8 +23,9 @@ const NewsList = () => {
 		const fetchData = async () => {
 			setLoading(true);
 			try {
+				const query = category === "all" ? "" : `&category=${category}`;
 				const response = await axios.get(
-					'https://newsapi.org/v2/top-headlines?country=kr&apiKey=28878c40f7874160af9a7113f65623aa',
+					`https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=28878c40f7874160af9a7113f65623aa`,
 				);
 				setArticles(response.data.articles);
 			} catch (e) {
@@ -33,7 +34,7 @@ const NewsList = () => {
 			setLoading(false);
 		};
 		fetchData();
-	}, []);
+	}, [category]);
 
 	if(loading) {
 		return <NewsListBlock>Loading...</NewsListBlock>
