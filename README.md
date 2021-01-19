@@ -1,9 +1,9 @@
-# 📰 news-react
+# 📰 react-news
 News application using newsapi.org
 
 ### Usage
 ```bash
-$ git clone https://github.com/yj-oh/news-react.git
+$ git clone https://github.com/yj-oh/react-news.git
 $ npm install
 $ npm run start
 ```
